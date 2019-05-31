@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div>
+    <form method="post" action="{{ url_for('deposit') }}">
+        <p><input name="name" id="name" required><label for="name">Name</label> </p>
+        <p><input name="type" id="type" required><label for="type">Type</label> </p>
+        <p><input name="weight" id="weight" required><label for="weight">Weight</label> </p>
+        <p><input name="age" id="age" required><label for="age">Age</label> </p>
+        <input type="submit" value="Deposit">
+    </form>
+    </div>
+    <div>
+    <table>
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Weight</th>
+            <th>Age</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for animal in animals %}
+            <tr>
+                <td>{{ animal.name }}</td>
+                <td>{{ animal.animal_type.name }}</td>
+                <td>{{ animal.weight }}</td>
+                <td>{{ animal.age }}</td>
+                <td><a href="{{ url_for('withdraw', animal_id=animal.id) }}">withdraw</a></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

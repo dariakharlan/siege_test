@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Shelter</title>
+</head>
+<body>
+<h1>Welcome to the Shelter!</h1>
+{% for category, message in get_flashed_messages(with_categories=true) %}
+    <div class="alert alert-{{ category }}" role="alert">
+        {{ message }}
+    </div>
+{% endfor %}
+{% block content %}{% endblock %}
+</body>
+</html>
