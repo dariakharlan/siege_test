@@ -32,7 +32,7 @@ def deposit():
 
 @app.route('/')
 def animals_list():
-    animals = session.query(Animal).all()
+    animals = session.query(Animal).limit(10).all()
     return render_template('index.html', animals=animals)
 
 
@@ -43,9 +43,20 @@ def stats():
     count_by_type = session.query(func.count(Animal.id), AnimalType.name)\
         .select_from(Animal)\
         .join(Animal.animal_type)\
-        .group_by(AnimalType.name).all()
+        .group_by(AnimalType.id).all()
     return render_template('stats.html', animals=animals, count_by_type=count_by_type, total=total,
                            count_by_user=[])
+
+
+@app.route('/dummy/<amount>')
+def dummy_data(amount):
+    for i in range(int(amount)):
+        for j in range(1, 5):
+            animal = Animal(animal_type_id=j, name='test', weight=10, age=5)
+            session.add(animal)
+        if i % 1000 == 0:
+            session.commit()
+    return redirect(url_for('stats'))
 
 
 if __name__ == '__main__':

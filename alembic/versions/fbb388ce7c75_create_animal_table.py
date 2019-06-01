@@ -28,6 +28,7 @@ def upgrade():
         sa.Column('weight', sa.Numeric),
         sa.Column('age', sa.Integer),
     )
+    op.create_index('idx_type_id', table_name, ['animal_type_id'])
 
 
 def downgrade():
