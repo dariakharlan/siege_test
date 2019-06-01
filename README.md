@@ -14,3 +14,7 @@ Execute `docker compose up -d` and that's all, after that service can be accesse
 
 ## Run siege:
 run --rm -t --network="siege_test_default" -v /Path/to/project/siege_test/urls:/etc/urls yokogawa/siege -d1 -t1M -c25 -i -f /etc/urls/urls.txt
+
+## Results
+
+![Siege test](https://github.com/dariakharlan/siege_test/blob/master/report/chart_100k.png)
